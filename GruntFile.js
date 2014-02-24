@@ -5,7 +5,9 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
-                separator: ''
+                separator: '',
+                banner: 'define(\'nvd3\', [\'d3\'], function(d3) {\n',
+                footer: '\nreturn nv;\n});'
             },
             dist: {
                 src: [
