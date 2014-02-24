@@ -1,3 +1,4 @@
+define('nvd3', ['d3'], function(d3) {
 (function(){
 
 var nv = window.nv || {};
@@ -14367,3 +14368,5 @@ nv.models.stackedAreaChart = function() {
   return chart;
 }
 })();
+return nv;
+});
