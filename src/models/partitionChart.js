@@ -26,7 +26,7 @@ nv.models.partitionChart = function() {"use strict";
 
          var availableWidth = (width || parseInt(container.style('width')) || 960) - margin.left - margin.right, availableHeight = (height || parseInt(container.style('height')) || 400) - margin.top - margin.bottom;
          var zoomOffset = (zoomingOffset || 30);
-         var selColor = (color || ['#89c9b6', '#ffffff']);
+         var selColor = (color || ['#296db0', '#ffffff', '#ffffff']);
 
          //------------------------------------------------------------
          // Setup Scales
@@ -65,7 +65,7 @@ nv.models.partitionChart = function() {"use strict";
          var normalizedHeight = availableHeight;
 
          // create rectangles
-         group.append('svg:rect').attr('fill', selColor[0]).attr('stroke', selColor[1]).attr('width', data.dy * normalizedWidth).attr('height', function(d) {
+         group.append('svg:rect').attr('fill', selColor[0]).attr('stroke', selColor[2]).attr('width', data.dy * normalizedWidth).attr('height', function(d) {
             // calculate height of rectangle
             return d.dx * normalizedHeight;
          }).on('click', function(data) {
@@ -103,7 +103,7 @@ nv.models.partitionChart = function() {"use strict";
                // translate text and set opacity if text height is to small
                allText.attr('transform', calculateTextTransformation).style('opacity', function(d) {
                   return d.dx * normalizedHeight > 12 ? 1 : 0;
-               });
+               }).style('fill', selColor[1]);
             }
          });
 
@@ -112,14 +112,15 @@ nv.models.partitionChart = function() {"use strict";
          // set transformation of the text and set opacity if text height is to small
          textContainers.attr('transform', calculateTextTransformation).style('opacity', function(d) {
             return d.dx * normalizedHeight > 12 ? 1 : 0;
-         });
+         }).style('fill', selColor[1]);
+
          // set text of the text container
          textContainers.text(function(currentNode) {
             return currentNode.name;
          });
 
          function calculateTextTransformation(node) {
-            var yTranslation = node.dx * normalizedHeight / 2 + 2;
+            var yTranslation = node.dx * normalizedHeight / 2 + 5;
             return 'translate(10,' + yTranslation + ')';
          }
 
